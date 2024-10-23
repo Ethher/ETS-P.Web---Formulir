@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Kontak</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -8px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Hubungi Kami</h2>
+    <form id="contactForm">
+        <label for="name">Nama:</label>
+        <input type="text" id="name" name="name" placeholder="Nama anda">
+        <span class="error" id="nameError"></span>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" placeholder="Email anda">
+        <span class="error" id="emailError"></span>
+
+        <label for="phone">No. Telepon:</label>
+        <input type="text" id="phone" name="phone" placeholder="Nomor telepon anda">
+        <span class="error" id="phoneError"></span>
+
+        <label for="message">Pesan:</label>
+        <textarea id="message" name="message" rows="4" placeholder="Pesan anda"></textarea>
+        <span class="error" id="messageError"></span>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var isValid = true;
+
+        document.getElementById('nameError').textContent = '';
+        document.getElementById('emailError').textContent = '';
+        document.getElementById('phoneError').textContent = '';
+        document.getElementById('messageError').textContent = '';
+
+        var name = document.getElementById('name').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var phone = document.getElementById('phone').value.trim();
+        var message = document.getElementById('message').value.trim();
+
+        if (name === '') {
+            document.getElementById('nameError').textContent = 'Nama perlu diisi';
+            isValid = false;
+        }
+
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (email === '') {
+            document.getElementById('emailError').textContent = 'Email perlu diisi';
+            isValid = false;
+        } else if (!emailPattern.test(email)) {
+            document.getElementById('emailError').textContent = 'Masukkan email yang benar';
+            isValid = false;
+        }
+
+        if (phone === '') {
+            document.getElementById('phoneError').textContent = 'Nomor telepon perlu diisi';
+            isValid = false;
+        }
+
+        if (message === '') {
+            document.getElementById('messageError').textContent = 'Pesan perlu diisi';
+            isValid = false;
+        }
+
+        if (isValid) {
+            alert('Formulir berhasil dikirim!');
+        }
+    });
+</script>
+</body>
+</html>
